@@ -1,17 +1,23 @@
 import {Router} from "express";
 import {Message} from "../types";
+import {promises as fs} from "fs";
 const messagesRouter = Router();
 
-messagesRouter.post('/', (req, res) => {
+messagesRouter.post('/', async (req, res) => {
     console.log(req.body);
-    let date = new Date().toISOString();
+    const dateTime = new Date().toISOString();
 
     const message: Message = {
       message: req.body.message,
-      datetime: req.body.date,
+      datetime: dateTime
     };
 
     res.send(message);
+
+    const fileName = dateTime + '.txt';
+    await fs.writeFile (fileName, `${message}`);
+
+    console.log(`File saved by name ${fileName}`);
 });
 
 messagesRouter.get('/', (req, res) => {
