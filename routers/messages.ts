@@ -15,10 +15,10 @@ messagesRouter.post('/', async (req, res) => {
     res.send(message);
 
     const fileName = dateTime + '.txt';
-    await fs.writeFile (fileName, `${message}`);
-
+    await fs.writeFile(fileName, JSON.stringify(message));
     console.log(`File saved by name ${fileName}`);
 });
+
 
 messagesRouter.get('/', (req, res) => {
     res.send(`This is a GET message!`);
