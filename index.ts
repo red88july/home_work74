@@ -1,6 +1,5 @@
 import express from 'express';
 import messagesRouter from "./routers/messages";
-import {promises as fs} from 'fs';
 
 const app = express();
 const favicon = require('serve-favicon');
